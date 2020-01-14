@@ -15,7 +15,7 @@ class _ProductsState extends State<Products> {
       "price": "100"
     },
     {
-      "name": "Blazer",
+      "name": "Blazzer",
       "picture": "images/products/blazer2.jpeg",
       "oldPrice": "140",
       "price": "80"
@@ -39,7 +39,7 @@ class _ProductsState extends State<Products> {
       "price": "100"
     },
     {
-      "name": "Hills",
+      "name": "Hill Shoes",
       "picture": "images/products/hills2.jpeg",
       "oldPrice": "150",
       "price": "100"
@@ -51,7 +51,7 @@ class _ProductsState extends State<Products> {
       "price": "100"
     },
     {
-      "name": "Pants",
+      "name": "Pant",
       "picture": "images/products/pants2.jpeg",
       "oldPrice": "150",
       "price": "100"
@@ -69,7 +69,7 @@ class _ProductsState extends State<Products> {
       "price": "100"
     },
     {
-      "name": "Skirt",
+      "name": "Skirts",
       "picture": "images/products/skt2.jpeg",
       "oldPrice": "150",
       "price": "100"
@@ -84,10 +84,11 @@ class _ProductsState extends State<Products> {
             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
           return SingleProduct(
-              productName: productDetails[index]['name'],
-              price: productDetails[index]['price'],
-              oldPrice: productDetails[index]['oldPrice'],
-              productImage: productDetails[index]['picture']);
+            productName: productDetails[index]['name'],
+            productImage: productDetails[index]['picture'],
+            price: productDetails[index]['price'],
+            oldPrice: productDetails[index]['oldPrice'],
+          );
         });
   }
 }
@@ -104,12 +105,17 @@ class SingleProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Hero(
+      child: new Hero(
         tag: productName,
         child: Material(
           child: InkWell(
-            onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                builder: (context) => ProductDetail())),
+            onTap: () => Navigator.of(context).push(
+                new MaterialPageRoute(builder: (context) => ProductDetail(
+                  productDetailName: productName,
+                  productDetailNewPrice: price,
+                  productDetailOldPrice: oldPrice,
+                  productDetailImage: productImage,
+                ))),
             child: GridTile(
               footer: Container(
                 color: Colors.white70,
